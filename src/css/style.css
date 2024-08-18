@@ -1,0 +1,101 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 200px;
+    /* Ancho ajustado */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #343a40;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.hr-thick {
+    border-top: 3px solid #6c757d;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#sidebar.active {
+    margin-left: -200px;
+    /* Ajuste según el nuevo ancho */
+}
+
+#content {
+    width: calc(100% - 200px);
+    /* Ajuste según el nuevo ancho */
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+#content iframe {
+    width: 100%;
+    height: calc(100vh - 60px);
+    /* Ajusta según sea necesario */
+    border: none;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -200px;
+        /* Ajuste según el nuevo ancho */
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #content {
+        width: 100%;
+    }
+
+    #content.active {
+        width: calc(100% - 200px);
+        /* Ajuste según el nuevo ancho */
+    }
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: #292e33;
+}
+
+#sidebar .nav-link {
+    color: #adb5bd;
+    padding: 10px 20px;
+}
+
+#sidebar .nav-link:hover {
+    color: #fff;
+    background: #292e33;
+}
+
+#sidebar .nav-link.active {
+    color: #fff;
+    background: #292e33;
+}
+
+/* ------------- Vista seguridad -------------- */
