@@ -6,17 +6,25 @@
     flex-direction: column;
 }
 
+/* Estilo general para la tabla */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
+.dataTables_filter input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
 
-
-
-
-
-/* Contenedor para alinear los botones en horizontal */
 .btn-vertical {
     display: flex;
-    flex-direction: row; /* Alineación en fila en lugar de columna */
-    gap: 5px; /* Espacio entre los botones */
+    flex-direction: row;
+    gap: 5px;
 }
 
 /* Botones */
@@ -51,6 +59,7 @@
     opacity: 0.8;
 }
 
+/* Alerta */
 
 .custom-toast-container {
     z-index: 9999 !important;
