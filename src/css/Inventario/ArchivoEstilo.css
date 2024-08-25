@@ -1,0 +1,21 @@
+.table td.nombre-paciente {
+    max-width: none;
+}
+
+.table td.observacion {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table td.observacion a.observacion-link {
+    color: black;
+    text-decoration: underline;
+}
+
+.table td.observacion a.observacion-link:hover {
+    text-decoration: none;
+    cursor: pointer;
+}

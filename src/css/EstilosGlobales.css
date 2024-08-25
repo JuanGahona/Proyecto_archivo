@@ -1,0 +1,165 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+.full-height-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo general para la tabla */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+}
+
+.table th {
+    background-color: #fecd02;
+    color: #010168;
+    border-bottom: 2px solid #010168;
+    padding: 12px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table td {
+    border-bottom: 1px solid #ffffff;
+    padding: 8px;
+    white-space: nowrap;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(254, 205, 2, 0.8);
+    color: #010168;
+}
+
+
+.table-responsive {
+    margin: 20px auto;
+    max-height: 400px;
+    width: 95%;
+    overflow-y: auto;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    word-wrap: break-word;
+}
+
+.dataTables_filter input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.btn-vertical {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+/* Botones */
+/* Estilo general para los botones de acción */
+.btn-action {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    border: none;
+    /* Eliminar bordes */
+}
+
+.btn-action i {
+    margin: 0;
+    font-size: 20px;
+}
+
+.btn-edit {
+    background-color: #007bff;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+    opacity: 0.8;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    opacity: 0.8;
+}
+
+.btn-file {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn-file:hover {
+    background-color: #e0a800;
+    opacity: 0.8;
+}
+
+.btn-action:hover i {
+    color: #fff;
+}
+
+/* Alerta */
+
+.custom-toast-container {
+    z-index: 9999 !important;
+}
+
+.custom-toast-popup {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-radius: 15px !important;
+    padding: 15px 20px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.custom-toast-title {
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 1.2em !important;
+    margin-bottom: 5px !important;
+}
+
+.custom-toast-content {
+    color: white !important;
+    font-size: 1em !important;
+}
+
+.swal2-timer-progress-bar {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.custom-toast-popup-warning {
+    background-color: #ffc107 !important; /* Color amarillo para advertencia */
+    color: black !important; /* Texto en negro para mejor contraste con el fondo amarillo */
+    border-radius: 15px !important;
+    padding: 15px 20px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.custom-toast-icon-warning {
+    color: red !important; /* Color rojo para el icono */
+}

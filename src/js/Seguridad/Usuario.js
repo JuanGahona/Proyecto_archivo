@@ -1,5 +1,4 @@
 CargarTablaUsuario();
-CargarRoles();
 
 function CargarTablaUsuario() {
     $(document).ready(function() {
@@ -22,24 +21,24 @@ function CargarTablaUsuario() {
                         { data: 'usuarios', title: 'Usuario' },
                         { data: 'nombres', title: 'Nombre' },
                         { data: 'email', title: 'Email' },
-                        { data: 'sucursal', title: 'Sucursal' },
+                        { data: 'sucursal', title: 'Sucursal', className: 'text-center' },
                         { data: 'rol.nombre', title: 'Rol' },
                         {
                             title: 'Acciones',
                             data: null,
                             render: function(data, type, row) {
                                 return `
-                                    <div class="btn-vertical">
-                                        <button class="btn btn-primary btn-sm btn-action btn-edit" data-id="${row.id}">
-                                            <i class="bi bi-person-fill-gear"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm btn-action btn-delete" data-id="${row.id}">
-                                            <i class="bi bi-person-dash-fill"></i>
-                                        </button>
-                                        <button onclick="Auditoria(${row.id})" class="btn btn-warning btn-sm btn-action">
-                                            <i class="bi bi-person-lines-fill"></i>
-                                        </button>
-                                    </div>
+                                <div class="btn-vertical">
+                                    <button class="btn btn-primary btn-sm btn-action btn-edit" data-id="${row.id}">
+                                        <i class="bi bi-person-fill-gear"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm btn-action btn-delete" data-id="${row.id}">
+                                        <i class="bi bi-person-dash-fill"></i>
+                                    </button>
+                                    <button onclick="Auditoria(${row.id})" class="btn btn-warning btn-sm btn-action btn-file" title="Auditoria">
+                                        <i class="bi bi-info-circle-fill"></i>
+                                    </button>
+                                </div>
                                 `;
                             }
                         }
@@ -100,6 +99,8 @@ function CargarTablaUsuario() {
                         icon: 'custom-toast-icon'
                     }
                 });
+
+                CargarRoles();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error en la solicitud AJAX: ' + textStatus);

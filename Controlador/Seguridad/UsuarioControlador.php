@@ -1,60 +1,61 @@
 <?php
 
     require_once('../../Configuracion/Conexion.php');
+    require_once '../../src/libreria/vendor/autoload.php';
 
-    function obtenerUsuarios()
-    {
-        // Obtener la conexión a la base de datos
-        $conexionData = obtenerConexion();
-
+    function obtenerUsuarios() {
+        // Obtener la conexión
+        $conn = obtenerConexion();
+    
         // Verificar si la conexión fue exitosa
-        if (isset($conexionData['conexion'])) {
-            $conexion = $conexionData['conexion'];
+        if ($conn instanceof PDO) {
+            // La conexión es válida
         } else {
             // En caso de error, devolver el mensaje de error
             $response = [
-                'message' => $conexionData['mensaje'],
+                'message' => isset($conn['mensaje']) ? $conn['mensaje'] : 'Error desconocido',
                 'data' => [],
                 'datatable' => [
                     'recordsTotal' => 0,
                     'recordsFiltered' => 0
                 ]
             ];
-
+    
             header('Content-Type: application/json');
             echo json_encode($response);
             return;
         }
-
+    
         try {
             // Consulta SQL para obtener los usuarios con personas y roles
             $sql = "SELECT 
-                                usuarios.id AS user_id, 
-                                usuarios.usuario,
-                                usuarios.nombres,
-                                usuarios.email,
-                                usuarios.sucursal,
-                                usuarios.rol_id,
-                                usuarios.estado,
-                                usuarios.created_at,
-                                usuarios.updated_at,
-                                roles.id AS rol_id, 
-                                roles.nombre AS rol_nombre
-                            FROM usuarios
-                            LEFT JOIN roles 
-                            ON usuarios.rol_id = roles.id";
-
-            $stmt = $conexion->prepare($sql);
+                        usuarios.id AS user_id, 
+                        usuarios.usuario,
+                        usuarios.nombres,
+                        usuarios.email,
+                        usuarios.sucursal,
+                        usuarios.rol_id,
+                        usuarios.estado,
+                        usuarios.created_at,
+                        usuarios.updated_at,
+                        roles.id AS rol_id, 
+                        roles.nombre AS rol_nombre
+                    FROM usuarios
+                    LEFT JOIN roles 
+                    ON usuarios.rol_id = roles.id";
+    
+            // Preparar y ejecutar la consulta
+            $stmt = $conn->prepare($sql);
             $stmt->execute();
-
+    
             // Obtener los resultados
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    
             // Agrupar la información
             $usuariosData = [];
             foreach ($usuarios as $usuario) {
                 $usuarioId = $usuario['user_id'];
-
+    
                 if (!isset($usuariosData[$usuarioId])) {
                     $usuariosData[$usuarioId] = [
                         'id' => $usuarioId,
@@ -73,10 +74,10 @@
                     ];
                 }
             }
-
+    
             // Convertir a un array indexado
             $usuariosData = array_values($usuariosData);
-
+    
             // Estructurar la respuesta JSON
             $response = [
                 'message' => 'Usuarios obtenidos con éxito',
@@ -86,11 +87,7 @@
                     'recordsFiltered' => count($usuariosData)
                 ]
             ];
-
-            // Devolver la respuesta en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
-
+    
         } catch (PDOException $e) {
             $response = [
                 'message' => 'Error al obtener usuarios: ' . $e->getMessage(),
@@ -100,123 +97,11 @@
                     'recordsFiltered' => 0
                 ]
             ];
-
-            // Devolver el error en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
         }
-    }
-
-    function buscarUsuario(){
-
-        // Obtener la conexión a la base de datos
-        $conexionData = obtenerConexion();
-
-        // Verificar si la conexión fue exitosa
-        if (isset($conexionData['conexion'])) {
-            $conexion = $conexionData['conexion'];
-        } else {
-            // En caso de error, devolver el mensaje de error
-            $response = [
-                'message' => $conexionData['mensaje'],
-                'data' => [],
-                'datatable' => [
-                    'recordsTotal' => 0,
-                    'recordsFiltered' => 0
-                ]
-            ];
-
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            return;
-        }
-
-        try {
-            // Consulta SQL para obtener los usuarios con personas y roles
-            $sql = "SELECT
-                            usuarios.id AS user_id, 
-                            usuarios.usuario,
-                            usuarios.nombres,
-                            usuarios.email,
-                            usuarios.sucursal,
-                            usuarios.rol_id,
-                            usuarios.estado,
-                            usuarios.created_at,
-                            usuarios.updated_at,
-                            roles.id AS rol_id, 
-                            roles.nombre AS rol_nombre
-                        FROM usuarios
-                        LEFT JOIN roles 
-                        ON usuarios.rol_id = roles.id
-                        WHERE usuarios.id = :user_id";
-
-
-            $stmt = $conexion->prepare($sql);
-            $stmt->execute();
-
-            // Obtener los resultados
-            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Agrupar la información
-            $usuariosData = [];
-            foreach ($usuarios as $usuario) {
-                $usuarioId = $usuario['user_id'];
-
-                if (!isset($usuariosData[$usuarioId])) {
-                    $usuariosData[$usuarioId] = [
-                        'id' => $usuarioId,
-                        'usuarios' => $usuario['usuario'],
-                        'nombres' => $usuario['nombres'],
-                        'email' => $usuario['email'],
-                        'sucursal' => $usuario['sucursal'],
-                        'rol_id' => $usuario['rol_id'],
-                        'estado' => $usuario['estado'],
-                        'created_at' => $usuario['created_at'],
-                        'updated_at' => $usuario['updated_at'],
-
-
-
-
-                        'rol' => [
-                            'id' => $usuario['rol_id'],
-                            'nombre' => $usuario['rol_nombre']
-                        ],
-                    ];
-                }
-            }
-
-            // Convertir a un array indexado
-            $usuariosData = array_values($usuariosData);
-
-            // Estructurar la respuesta JSON
-            $response = [
-                'message' => 'Usuarios obtenidos con éxito',
-                'data' => $usuariosData,
-                'datatable' => [
-                    'recordsTotal' => count($usuariosData),
-                    'recordsFiltered' => count($usuariosData)
-                ]
-            ];
-
-            // Devolver la respuesta en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
-
-        } catch (PDOException $e) {
-            $response = [
-                'message' => 'Error al obtener usuarios: ' . $e->getMessage(),
-                'data' => [],
-                'datatable' => [
-                    'recordsTotal' => 0,
-                    'recordsFiltered' => 0
-                ]
-            ];
-
-            // Devolver el error en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
-        }
-
+    
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 
     function crearUsuario(){
@@ -316,15 +201,16 @@
     }
 
     function Auditoria($id) {
-        $conexionData = obtenerConexion();
+        // Obtener la conexión
+        $conn = obtenerConexion();
     
         // Verificar si la conexión fue exitosa
-        if (isset($conexionData['conexion'])) {
-            $conexion = $conexionData['conexion'];
+        if ($conn instanceof PDO) {
+            // La conexión es válida
         } else {
             // En caso de error, devolver el mensaje de error
             $response = [
-                'message' => $conexionData['mensaje'],
+                'message' => isset($conn['mensaje']) ? $conn['mensaje'] : 'Error desconocido',
                 'data' => [],
                 'datatable' => [
                     'recordsTotal' => 0,
@@ -341,7 +227,8 @@
             // Consulta SQL para obtener la auditoría del usuario por ID
             $sql = "SELECT usuario, creado_por, created_at, actualizado_por, updated_at FROM usuarios WHERE id = :id";
     
-            $stmt = $conexion->prepare($sql);
+            // Preparar y ejecutar la consulta
+            $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
     
@@ -378,10 +265,6 @@
                 ];
             }
     
-            // Devolver la respuesta en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
-    
         } catch (PDOException $e) {
             $response = [
                 'message' => 'Error al obtener la auditoría: ' . $e->getMessage(),
@@ -391,40 +274,40 @@
                     'recordsFiltered' => 0
                 ]
             ];
-    
-            // Devolver el error en formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($response);
         }
+    
+        // Devolver la respuesta en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 
     function ConsultarRol() {
-        // Obtener la conexión a la base de datos
-        $conexionData = obtenerConexion();
-        $response = [
-            'message' => '',
-            'data' => [],
-            'datatable' => [
-                'recordsTotal' => 0,
-                'recordsFiltered' => 0
-            ]
-        ];
+         // Obtener la conexión
+         $conn = obtenerConexion();
     
-        // Verificar si la conexión fue exitosa
-        if (!isset($conexionData['conexion'])) {
-            // En caso de error, devolver el mensaje de error
-            $response['message'] = $conexionData['mensaje'];
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            return;
-        }
-    
-        $conexion = $conexionData['conexion'];
+         // Verificar si la conexión fue exitosa
+         if ($conn instanceof PDO) {
+             // La conexión es válida
+         } else {
+             // En caso de error, devolver el mensaje de error
+             $response = [
+                 'message' => isset($conn['mensaje']) ? $conn['mensaje'] : 'Error desconocido',
+                 'data' => [],
+                 'datatable' => [
+                     'recordsTotal' => 0,
+                     'recordsFiltered' => 0
+                 ]
+             ];
+     
+             header('Content-Type: application/json');
+             echo json_encode($response);
+             return;
+         }
     
         try {
             // Consulta SQL para obtener los roles
             $sql = "SELECT * FROM roles";
-            $stmt = $conexion->prepare($sql);
+            $stmt = $conn->prepare($sql);
             $stmt->execute();
     
             // Obtener los resultados
