@@ -218,23 +218,23 @@ function Auditoria(id) {
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="usuarioInput" class="form-label"><strong>Usuario:</strong></label>
-                                    <input type="text" class="form-control" id="usuarioInput" value="${usuarioData.usuario}" readonly>
+                                    <input type="text" class="form-control" id="usuarioInput" value="${usuarioData.usuario}" readonly disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label for="creadoPorInput" class="form-label"><strong>Creado por:</strong></label>
-                                    <input type="text" class="form-control" id="creadoPorInput" value="${usuarioData.creado_por}" readonly>
+                                    <input type="text" class="form-control" id="creadoPorInput" value="${usuarioData.creado_por}" readonly disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label for="fechaCreacionInput" class="form-label"><strong>Fecha de creación:</strong></label>
-                                    <input type="text" class="form-control" id="fechaCreacionInput" value="${usuarioData.fecha_creacion}" readonly>
+                                    <input type="text" class="form-control" id="fechaCreacionInput" value="${usuarioData.fecha_creacion}" readonly disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label for="actualizadoPorInput" class="form-label"><strong>Actualizado por:</strong></label>
-                                    <input type="text" class="form-control" id="actualizadoPorInput" value="${usuarioData.actualizado_por}" readonly>
+                                    <input type="text" class="form-control" id="actualizadoPorInput" value="${usuarioData.actualizado_por}" readonly disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label for="fechaActualizacionInput" class="form-label"><strong>Fecha de actualización:</strong></label>
-                                    <input type="text" class="form-control" id="fechaActualizacionInput" value="${usuarioData.fecha_actualizacion}" readonly>
+                                    <input type="text" class="form-control" id="fechaActualizacionInput" value="${usuarioData.fecha_actualizacion}" readonly disabled>
                                 </div>
                             </div>
                             <div class="modal-footer">

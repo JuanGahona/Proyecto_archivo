@@ -52,6 +52,7 @@ require_once '../src/libreria/cabezal.php';
 </div>
 
 
+
 <?php
 require_once '../src/libreria/piedepagina.php';
 ?>

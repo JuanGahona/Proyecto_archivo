@@ -8,7 +8,7 @@
     <div class="login-container animate__animated animate__fadeInDown">
         <div class="login-header">
             <div class="file-icon animate__animated animate__bounceIn">
-                <i class="bi bi-folder-fill"></i> <!-- Icono de carpeta -->
+                <i class="bi bi-folder-fill"></i>
             </div>
             <h1 class="gradient-text">Clinica Medilaser</h1>
             <p class="gradient-text">Gestión de Historias Clínicas</p>
@@ -22,6 +22,9 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
             </div>
+            <div class="mb-3">
+                <a href="#">¿Se te olvido tu contraseña?</a>
+            </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-login">Ingresar</button>
             </div>
@@ -31,7 +34,6 @@
         </div>
     </div>
 </div>
-
 
 
 <?php

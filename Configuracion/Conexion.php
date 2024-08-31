@@ -1,7 +1,7 @@
 <?php
 
     // $host = 'localhost';
-    // $dbname = 'proyecto_archivo';
+    // $dbname = 'proyecto_archivo_';
     // $username = 'root';
     // $password = '';
 
@@ -19,10 +19,15 @@
     // }
 
 
-    $host = 'dpg-cr4tt9t2ng1s73e7gjr0-a.oregon-postgres.render.com'; // Cambia esto al host de tu servidor PostgreSQL
-    $dbname = 'proyecto_archivo';
-    $username = 'sebas0946'; // Cambia esto al nombre de usuario de tu base de datos PostgreSQL
-    $password = 'NwXszdWQVbWO2fWaw70Z4yzbneLtFrNq'; // Cambia esto a tu contraseña de PostgreSQL
+    // $host = 'dpg-cr4tt9t2ng1s73e7gjr0-a.oregon-postgres.render.com'; 
+    // $dbname = 'proyecto_archivo';
+    // $username = 'sebas0946'; 
+    // $password = 'NwXszdWQVbWO2fWaw70Z4yzbneLtFrNq'; 
+
+    $host = 'localhost'; 
+    $dbname = 'proyecto_archivo_prueba';
+    $username = 'postgres'; 
+    $password = '0946';
 
     function obtenerConexion() {
         global $host, $dbname, $username, $password;
